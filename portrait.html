@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>人像摄影 | 作品集</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* 使用与 landscape.html 相同的样式 */
+        .gallery-detail {
+            padding: 100px 20px 50px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .category-title {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .photo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .photo-item {
+            position: relative;
+            border-radius: 10px;
+            overflow: hidden;
+            background: var(--bg-secondary);
+        }
+        
+        .photo-item img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+        
+        .photo-info {
+            padding: 20px;
+            background: var(--bg-secondary);
+        }
+        
+        .photo-info h3 {
+            margin-bottom: 10px;
+            color: var(--text-primary);
+        }
+        
+        .photo-info p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+        
+        .back-button {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            padding: 10px 20px;
+            background: var(--gradient);
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            z-index: 1000;
+        }
+    </style>
+</head>
+<body>
+    <a href="index.html" class="back-button">返回首页</a>
+    
+    <div class="gallery-detail">
+        <div class="category-title">
+            <h1>人像摄影作品集</h1>
+            <p>捕捉人物最美的瞬间</p>
+        </div>
+        
+        <div class="photo-grid">
+            <div class="photo-item">
+                <img src="https://img0.baidu.com/it/u=3121841941,3830311674&fm=253&fmt=auto&app=138&f=JPEG" alt="人像1">
+                <div class="photo-info">
+                    <h3>自然光人像</h3>
+                    <p>利用自然光线打造柔美的人像效果，展现人物的自然之美。</p>
+                </div>
+            </div>
+            
+            <div class="photo-item">
+                <img src="https://img1.baidu.com/it/u=3709586903,1286591012&fm=253&fmt=auto&app=138&f=JPEG" alt="人像2">
+                <div class="photo-info">
+                    <h3>街拍人像</h3>
+                    <p>在城市街头捕捉的随性人像，展现生活中的精彩瞬间。</p>
+                </div>
+            </div>
+            
+            <div class="photo-item">
+                <img src="https://img2.baidu.com/it/u=1003272215,1878948666&fm=253&fmt=auto&app=120&f=JPEG" alt="人像3">
+                <div class="photo-info">
+                    <h3>艺术人像</h3>
+                    <p>创意构图和灯光运用，打造富有艺术感的人像作品。</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html> 

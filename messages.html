@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>给我留言 | 风中散发</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .messages-container {
+            max-width: 800px;
+            margin: 100px auto 50px;
+            padding: 0 20px;
+        }
+
+        .message-form {
+            background: var(--bg-secondary);
+            padding: 30px;
+            border-radius: 10px;
+            margin-bottom: 40px;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--text-primary);
+        }
+
+        .input-group input,
+        .input-group textarea {
+            width: 100%;
+            padding: 12px;
+            background: var(--bg-color);
+            border: 1px solid var(--text-secondary);
+            border-radius: 5px;
+            color: var(--text-primary);
+            font-size: 16px;
+        }
+
+        .input-group textarea {
+            height: 120px;
+            resize: vertical;
+        }
+
+        .submit-btn {
+            background: var(--gradient);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: opacity 0.3s;
+        }
+
+        .submit-btn:hover {
+            opacity: 0.9;
+        }
+
+        .message-list {
+            margin-top: 40px;
+        }
+
+        .message {
+            background: var(--bg-secondary);
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .message-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            color: var(--text-secondary);
+        }
+
+        .message-content {
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+
+        .back-btn {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            padding: 10px 20px;
+            background: var(--gradient);
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            z-index: 1000;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <a href="index.html" class="back-btn">返回首页</a>
+
+    <div class="messages-container">
+        <h1 class="section-title">给我留言</h1>
+
+        <div class="message-form">
+            <div class="input-group">
+                <label for="name">你的昵称</label>
+                <input type="text" id="name" required>
+            </div>
+            <div class="input-group">
+                <label for="content">留言内容</label>
+                <textarea id="content" required></textarea>
+            </div>
+            <button onclick="addMessage()" class="submit-btn">发表留言</button>
+        </div>
+
+        <div class="message-list" id="messageList">
+            <!-- 留言会在这里显示 -->
+        </div>
+    </div>
+
+    <script>
+        // 页面加载时显示已有留言
+        window.onload = function() {
+            const messages = JSON.parse(localStorage.getItem('messages') || '[]');
+            messages.forEach(showMessage);
+        }
+
+        function addMessage() {
+            const name = document.getElementById('name').value.trim();
+            const content = document.getElementById('content').value.trim();
+            
+            if (!name || !content) {
+                alert('请填写昵称和留言内容！');
+                return;
+            }
+
+            const message = {
+                name: name,
+                content: content,
+                time: new Date().toLocaleString()
+            };
+
+            // 保存到本地存储
+            const messages = JSON.parse(localStorage.getItem('messages') || '[]');
+            messages.unshift(message);
+            localStorage.setItem('messages', JSON.stringify(messages));
+
+            // 显示新留言
+            showMessage(message);
+
+            // 清空输入框
+            document.getElementById('name').value = '';
+            document.getElementById('content').value = '';
+
+            alert('留言成功！');
+        }
+
+        function showMessage(message) {
+            const messageList = document.getElementById('messageList');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'message';
+            messageDiv.innerHTML = `
+                <div class="message-header">
+                    <span>${message.name}</span>
+                    <span>${message.time}</span>
+                </div>
+                <div class="message-content">${message.content}</div>
+            `;
+            messageList.insertBefore(messageDiv, messageList.firstChild);
+        }
+    </script>
+</body>
+</html> 
